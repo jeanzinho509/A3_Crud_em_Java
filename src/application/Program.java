@@ -18,7 +18,7 @@ public class Program {
 		System.out.println("| Trabalho de gestao e qualidade de software |");
 		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++\n");
 		System.out.println("---------------------------------");
-		System.out.println("|    Parte 1 da avalia��o A3    |");
+		System.out.println("|    Parte 1 da avaliacao A3    |");
 		System.out.println("---------------------------------\n");
 		System.out.println("********************************");
 		System.out.println("| Aluno: Jean Woodly Estime |");
@@ -110,7 +110,7 @@ public class Program {
 			System.out.println(" ---- Menu out ----");
 		}
 		System.out.println("\nDigite 1 para voltar ao menu\nDigite 2 para sair");
-		System.out.print("\nOp��o desejada: ");
+		System.out.print("\nOperaco desejada: ");
 		int option = input.nextInt();
 		if (option == 2) {
 			binary = 1;
