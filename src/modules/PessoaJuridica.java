@@ -16,17 +16,6 @@ public class PessoaJuridica extends Pessoa {
 		this.cnpj = cnpj;
 	}
 
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return super.getName();
-	}
-
-	@Override
-	public void setName(String name) {
-		// TODO Auto-generated method stub
-		super.setName(name);
-	}
 
 	
 	
