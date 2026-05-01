@@ -36,59 +36,56 @@ public class Program {
 		System.out.println("7 - Listar Pessoas Fisica");
 		System.out.println("8 - Listar Pessoas Juridica");
 		System.out.println("9 - Sair do menu\n");
-		System.out.print("Sua escolha: ");
-		int choice = input.nextInt();
+
+		int choice = -1;
 		while (choice < 1 || choice > 9) {
-			System.out.println("Essa Opcao nao e valida");
-			System.out.print("\nEscolha novamente: ");
-			choice = input.nextInt();
+			System.out.print("Sua escolha: ");
+			try {
+				choice = Integer.parseInt(input.nextLine());
+				if (choice < 1 || choice > 9) {
+					System.out.println("Essa Opcao nao e valida\n");
+				}
+			} catch (NumberFormatException e) {
+				System.out.println("Entrada invalida. Por favor, digite um numero.\n");
+			}
 		}
+
 		if (choice == 1) {
 			System.out.print("\nNome: ");
-			String name = input.next();
-			input.nextLine();
+			String name = input.nextLine();
 			System.out.print("CPF: ");
-			long cpf = input.nextLong();
-			input.nextLine();
+			long cpf = readLong(input);
 			PessoaFisica pf = new PessoaFisica(name, cpf);
 			rpf.create(pf);
 		}
 		else if (choice == 2) {
 			System.out.print("\nNome: ");
-			String name = input.next();
-			input.nextLine();
-			System.out.println("CNPJ: ");
-			long cnpj = input.nextLong();
-			input.nextLine();
+			String name = input.nextLine();
+			System.out.print("CNPJ: ");
+			long cnpj = readLong(input);
 			PessoaJuridica pj = new PessoaJuridica(name, cnpj);
 			rpj.create(pj);
 		} else if (choice == 3) {
 			System.out.print("\nPor favor Escolha um novo nome: ");
-			String name = input.next();
-			input.nextLine();
-			System.out.println("CPF: ");
-			long cpf = input.nextLong();
-			input.nextLine();
+			String name = input.nextLine();
+			System.out.print("CPF: ");
+			long cpf = readLong(input);
 			PessoaFisica pf = new PessoaFisica(name, cpf);
 			rpf.update(pf);
 		} else if (choice == 4) {
 			System.out.print("\nEscolha um novo nome: ");
-			String name = input.next();	
-			input.nextLine();
-			System.out.println("CNPJ: ");
-			long cnpj = input.nextLong();
-			input.nextLine();
+			String name = input.nextLine();
+			System.out.print("CNPJ: ");
+			long cnpj = readLong(input);
 			PessoaJuridica pj = new PessoaJuridica(name, cnpj);
 			rpj.update(pj);
 		} else if (choice == 5) {
 			System.out.print("\nDigite o CPF da pessoa que quer deletar: ");
-			long cpf = input.nextLong();
-			input.nextLine();
+			long cpf = readLong(input);
 			rpf.delete(cpf);
 		} else if (choice == 6) {
 			System.out.print("\nDigite o CNPJ da pessoa que quer deletar: ");
-			long cnpj = input.nextLong();
-			input.nextLine();
+			long cnpj = readLong(input);
 			rpj.delete(cnpj);
 		} else if (choice == 7) {
 			System.out.println("\nLista:");
@@ -109,10 +106,25 @@ public class Program {
 		} else {
 			System.out.println(" ---- Menu out ----");
 		}
-		System.out.println("\nDigite 1 para voltar ao menu\nDigite 2 para sair");
-		System.out.print("\nOperaco desejada: ");
-		int option = input.nextInt();
-		if (option == 2) {
+
+		if (choice != 9) {
+			System.out.println("\nDigite 1 para voltar ao menu\nDigite 2 para sair");
+			int option = -1;
+			while (option != 1 && option != 2) {
+				System.out.print("\nOperacao desejada: ");
+				try {
+					option = Integer.parseInt(input.nextLine());
+					if (option != 1 && option != 2) {
+						System.out.println("Opcao invalida.");
+					}
+				} catch (NumberFormatException e) {
+					System.out.println("Entrada invalida. Por favor, digite 1 ou 2.");
+				}
+			}
+			if (option == 2) {
+				binary = 1;
+			}
+		} else {
 			binary = 1;
 		}
 		}
@@ -120,6 +132,16 @@ public class Program {
 		System.out.println("|  GOD BLESS ALL OF US  |");
 		System.out.println("+++++++++++++++++++++++");
 		input.close();
+	}
+
+	private static long readLong(Scanner input) {
+		while (true) {
+			try {
+				return Long.parseLong(input.nextLine());
+			} catch (NumberFormatException e) {
+				System.out.print("Entrada invalida. Por favor, digite um numero: ");
+			}
+		}
 	}
 
 }
