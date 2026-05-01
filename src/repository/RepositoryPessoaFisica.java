@@ -11,14 +11,11 @@ public class RepositoryPessoaFisica implements IRepositoryCRUD{
 	
 	@Override
 	public boolean create(Pessoa pessoa) {
-		boolean check = false;
-		try {
+		if (pessoa instanceof PessoaFisica) {
 			listPF.add((PessoaFisica) pessoa);
-			check = true;
-		} catch (Exception e) {
-			check = false;
+			return true;
 		}
-		return check;
+		return false;
 	}
 
 	@Override
@@ -29,16 +26,14 @@ public class RepositoryPessoaFisica implements IRepositoryCRUD{
 	@Override
 	public boolean update(Pessoa pessoa) {
 		boolean check = false;
-		PessoaFisica pf = (PessoaFisica) pessoa;
-		try {
+		if (pessoa instanceof PessoaFisica) {
+			PessoaFisica pf = (PessoaFisica) pessoa;
 			for (int i = 0; i < listPF.size(); i++) {
 				if (listPF.get(i).getCpf() == pf.getCpf()) {
 					listPF.get(i).setName(pf.getName());
 					check = true;
 				}
 			}
-		} catch (Exception e) {
-			check = false;			
 		}
 		return check;
 	}
@@ -46,15 +41,11 @@ public class RepositoryPessoaFisica implements IRepositoryCRUD{
 	@Override
 	public boolean delete(long id) {
 		boolean check = false;
-		try {
-			for (int i = 0; i < listPF.size(); i++) {
-				if (listPF.get(i).getCpf() == id) {
-					listPF.remove(i);
-					check = true;
-				}
+		for (int i = 0; i < listPF.size(); i++) {
+			if (listPF.get(i).getCpf() == id) {
+				listPF.remove(i);
+				check = true;
 			}
-		} catch (Exception e) {
-			check = false;
 		}
 		return check;
 	}
